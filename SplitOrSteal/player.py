@@ -28,7 +28,6 @@ class Player(ABC):
             return Move.SPLIT
         else:
             return Move.STEAL
-
     
     def update(self, choice, result, money):
         self.round += 1
@@ -39,6 +38,9 @@ class Player(ABC):
     
     def observe(self, opponent):
         self.opponent = opponent
+    
+    def get_class(self):
+        return self.__class__.__name__
     
     def reset(self):
         self.round = 1

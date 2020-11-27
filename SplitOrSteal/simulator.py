@@ -10,9 +10,10 @@ def simulate_game(player1, player2, pot=1000, pool=100, max_round=10, print_roun
         deduct = simulate_round(player1, player2, pool, print_rounds)
         pot -= deduct
         rnd += 1
-    print("Player 1 has", player1.money, "money")
-    print("Player 2 has", player2.money, "money")
-    print("Remaining money left in pot:", pot)
+    if print_rounds:
+        print("Player 1 has", player1.money, "money")
+        print("Player 2 has", player2.money, "money")
+        print("Remaining money left in pot:", pot)
 
 
 def simulate_round(player1, player2, pool, print_rounds):
