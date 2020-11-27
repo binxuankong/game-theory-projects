@@ -1,7 +1,5 @@
 # Game Theory Projects
 
-Various interesting game theory related projects to find the optimum solution (if any)
-
 Game theory - the study of mathematical models of strategic interaction among rational decision-makers.
 
 Consists of various notebooks/projects of different games, where I create simulations for bots with different strategies to play with each other. The main goal is to find the optimum solution, if there is one, for each game.
