@@ -4,12 +4,19 @@ def simulate_game(player1, player2, pot=1000, pool=100, max_round=10, print_roun
     player1.reset()
     player2.reset()
     rnd = 1
+    if print_rounds:
+        print("Initial pot:", pot)
+        print("Pool each round:", pool)
+        print("Max round:", max_round)
+        print()
+
     while pot > 0 and rnd <= max_round:
         if print_rounds:
             print("Round", rnd)
         deduct = simulate_round(player1, player2, pool, print_rounds)
         pot -= deduct
         rnd += 1
+    
     if print_rounds:
         print("Player 1 has", player1.money, "money")
         print("Player 2 has", player2.money, "money")

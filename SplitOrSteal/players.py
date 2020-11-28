@@ -1,7 +1,7 @@
 from player import Player
 from mechanics import *
 
-# Has equal chance of choosing SHARE/STEAL
+# Has equal chance of choosing split/steal
 class RandomPlayer(Player):
     
     def __init__(self):
