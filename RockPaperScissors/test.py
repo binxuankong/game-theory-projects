@@ -34,5 +34,5 @@ for i in range(num_games):
     player2.update(claim2, move2, Result(result * -1))
     print()
 
-print(player1.get_stats())
-print(player2.get_stats())
+print(player1.get_all_stats())
+print(player2.get_all_stats())

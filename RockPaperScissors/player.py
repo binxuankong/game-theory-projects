@@ -49,19 +49,42 @@ class Player(ABC):
         return Move(list(MATCHUP.keys())[list(MATCHUP.values()).index(claim.value)])
     
     def update(self, claim, choice, result):
-        self.round += 1
         self.results[result.name] += 1
         self.previous_claims.append(claim)
         self.previous_choices.append(choice)
         self.previous_strategies.append(Strategy(compare(claim, choice)))
         self.previous_results.append(result)
+        self.update_honesty(claim, choice)
+        self.round += 1
     
     def observe(self, opponent):
         self.opponent = opponent
     
+    # A: 80-100% honest
+    # B: 60-79% honest
+    # C: 40-59% honest
+    # D: 20-39% honest
+    # E: 0-19% honest
+    def update_honesty(self, claim, choice):
+        if claim == choice:
+            self.honest_count += 1
+        honest_percent = (self.honest_count * 100) / len(self.previous_claims)
+        if honest_percent >= 80:
+            self.honesty = 'A'
+        elif honest_percent >= 60:
+            self.honesty = 'B'
+        elif honest_percent >= 40:
+            self.honesty = 'C'
+        elif honest_percent >= 20:
+            self.honesty = 'D'
+        else:
+            self.honesty = 'E'
+    
     def reset(self):
-        self.round = 0
+        self.round = 1
         self.results = {'WIN': 0, 'TIE': 0, 'LOSE': 0}
+        self.honest_count = 0
+        self.honesty = 'A'
         # Save history
         self.previous_claims = []
         self.previous_choices = []
@@ -76,6 +99,7 @@ class Player(ABC):
     def get_all_stats(self):
         return {'Rounds': self.round,
                 'Results': self.results,
+                'Honesty': self.honesty,
                 'Claims': [c.name for c in self.previous_claims],
                 'Choices': [c.name for c in self.previous_choices],
                 'Strategies': [s.name for s in self.previous_strategies],

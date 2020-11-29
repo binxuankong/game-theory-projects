@@ -4,7 +4,7 @@ from mechanics import Move, Result
 def start_game(player, opponent, pot=1000, pool=100, max_round=10):
     player.reset()
     opponent.reset()
-    rnd = 1
+    rnd = 0
     update_interface(player, opponent, pot, pool, rnd)
     
     while pot > 0 and rnd < max_round:
