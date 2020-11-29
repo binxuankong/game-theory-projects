@@ -7,12 +7,15 @@ def start_game(player, opponent, pot=1000, pool=100, max_round=10):
     rnd = 1
     update_interface(player, opponent, pot, pool, rnd)
     
-    while pot > 0 and rnd <= max_round:
+    while pot > 0 and rnd < max_round:
         user_choice = get_user_input()
         deduct, game_log = play_round(player, opponent, user_choice, pool)
         pot -= deduct
         rnd += 1
-        update_interface(player, opponent, pot, pool, rnd)
+        if rnd == max_round:
+            update_interface(player, opponent, pot, pool, 'END')
+        else:
+            update_interface(player, opponent, pot, pool, rnd)
         print(game_log)
 
 
@@ -42,7 +45,7 @@ def play_round(player, opponent, player_choice, pool):
     opponent_choice = opponent.action()
     game_log = ""
     game_log += "# Player chooses " + player_choice.name + "\n"
-    game_log += "# Opponent chooses " + player_choice.name + "\n"
+    game_log += "# Opponent chooses " + opponent_choice.name + "\n"
     
     # Get result
     if player_choice == opponent_choice:
@@ -88,44 +91,45 @@ def print_header():
     # Clear terminal output
     os.system('clear')
     # Header
-    print("#########################################################")
-    print("\t\t\tS P L I T")
-    print("\t\t\t   O R")
-    print("\t\t\tS T E A L")
-    print("#########################################################")
+    print_hashline()
+    print("\t\t\t\tS P L I T")
+    print("\t\t\t\t   O R")
+    print("\t\t\t\tS T E A L")
+    print_hashline()
     print()
     print("#\tPossible actions: 'split' or 'steal'")
     print("#\tEnter 'quit' or 'q' to quit")
     print()
-    print("#########################################################")
+    print_hashline()
     print()
 
 
 # Print out the summary of the round
-def get_round_summary(player, opponent, pot, pool, round):
-    print("#\tROUND:\t", round)
-    print("#\tPOT:\t", pot)
-    print("#\tPOOL:\t", pool)
+def get_round_summary(player, opponent, pot, pool, rnd):
+    print("#\tROUND\t", rnd)
+    print("#\tPOT\t", pot)
+    print("#\tPOOL\t", pool)
     print()
-    print("#########################################################")
+    print_hashline()
     print()
     print("#\tPLAYER")
     get_player_info(player)
     print()
-    print("#########################################################")
+    print_hashline()
     print()
     print("#\tOPPONENT")
     get_player_info(opponent)
     print()
-    print("#########################################################")
+    print_hashline()
     print()
 
 
 # Print player's money and previous three actions
 def get_player_info(player):
     print("#\tMONEY\t", player.money)
-    print("#\tPREVIOUS\t", [p.name for p in player.previous_actions])
+    print("#\tPREV\t", [p.name for p in player.previous_actions[-3:]])
 
 
 def print_hashline():
-    print("########################")
+    # 24 #s
+    print("#################################################################################")
