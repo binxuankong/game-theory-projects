@@ -1,5 +1,5 @@
 from player import Player
-from mechanics import *
+from mechanics import Move, Result
 
 # Has equal chance of choosing split/steal
 class RandomPlayer(Player):

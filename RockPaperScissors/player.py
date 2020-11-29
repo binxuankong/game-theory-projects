@@ -1,6 +1,6 @@
 import random
 from abc import ABC
-from mechanics import *
+from mechanics import Move, Strategy, MATCHUP, compare
 
 # Abstract class for a Player
 class Player(ABC):

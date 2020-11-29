@@ -1,4 +1,4 @@
-from mechanics import *
+from mechanics import Move, Result
 
 def simulate_game(player1, player2, pot=1000, pool=100, max_round=10, print_rounds=False):
     player1.reset()

@@ -1,4 +1,3 @@
-import random
 from enum import Enum
 
 class Move(Enum):
