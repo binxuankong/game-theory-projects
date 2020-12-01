@@ -32,8 +32,8 @@ def simulate_round(player1, player2, pool, print_rounds):
     action1 = player1.action()
     action2 = player2.action()
     if print_rounds:
-        print("Player 1 chooses", action1)
-        print("Player 2 chooses", action2)
+        print("Player 1 chooses", action1.name)
+        print("Player 2 chooses", action2.name)
     
     # Get result
     if action1 == action2:
@@ -44,13 +44,13 @@ def simulate_round(player1, player2, pool, print_rounds):
             player2.update(action2, Result.SPLIT_WON, gains)
             if print_rounds:
                 print("Player 1 gains", gains, "money")
-                print("Player 2 gains", gains, "money\n")
+                print("Player 2 gains", gains, "money")
         # Both steal
         else:
             player1.update(action1, Result.STOLE_LOST, 0)
             player2.update(action2, Result.STOLE_LOST, 0)
             if print_rounds:
-                print("No one gets anything\n")
+                print("No one gets anything")
             pool = 0
     else:
         # Player 1 steal
@@ -58,12 +58,12 @@ def simulate_round(player1, player2, pool, print_rounds):
             player1.update(action1, Result.STOLE_WON, pool)
             player2.update(action2, Result.SPLIT_LOST, 0)
             if print_rounds:
-                print("Player 1 gains", pool, "money\n")
+                print("Player 1 gains", pool, "money")
         # Player 2 steal
         else:
             player1.update(action1, Result.SPLIT_LOST, 0)
             player2.update(action2, Result.STOLE_WON, pool)
             if print_rounds:
-                print("Player 2 gains", pool, "money\n")
+                print("Player 2 gains", pool, "money")
     
     return pool

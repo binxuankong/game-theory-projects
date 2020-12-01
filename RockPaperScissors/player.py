@@ -10,12 +10,14 @@ class Player(ABC):
         # Initial
         self.reset()
 
+    # Method to claim
     # Equal chance of picking ROCK, PAPER or SCISSORS
-    def random_choice(self):
+    def claim(self):
         return Move(random.randint(1,3))
     
+    # Method to choose
     # Equal chance of using a random strategy
-    def random_strategy(self, claim):
+    def choose(self, claim):
         roll = random.randint(0,2)
         if roll == 0:
             return self.step0_strategy(claim)

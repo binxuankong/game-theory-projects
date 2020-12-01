@@ -17,7 +17,7 @@ def start_game(player, opponent, rounds=10):
         user_claim = get_user_input()
         # Escape sequence: to clear the input line
         print("\033[A                             \033[A")
-        opponent_claim = opponent.random_choice()
+        opponent_claim = opponent.claim()
         print("# Player claims to use", user_claim.name)
         print("# Opponent claims to use", opponent_claim.name)
         print()
@@ -25,7 +25,7 @@ def start_game(player, opponent, rounds=10):
         user_choice = get_user_input(claim=False)
         # Escape sequence: to clear the input line
         print("\033[A                             \033[A")
-        opponent_choice = opponent.random_strategy(opponent_claim)
+        opponent_choice = opponent.choose(opponent_claim)
         print("# Player uses", user_choice.name)
         print("# Opponent uses", opponent_choice.name)
         print()
@@ -44,6 +44,10 @@ def start_game(player, opponent, rounds=10):
         opponent.update(opponent_claim, opponent_choice, Result(result * -1))
         # Continue
         input("# Enter any key to continue ")
+    
+    print("# Opponent:", opponent.get_class())
+    print()
+    print_hashline()
 
 
 # Get user input for claim/choice
